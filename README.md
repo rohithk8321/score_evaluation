@@ -7,11 +7,20 @@ This Spring Boot application is designed to handle the evaluation of test scores
 - **MySQL**: Database for storing scores and testee information
 - **Liquibase**: For database migrations
 - **Swagger UI**: For API documentation
-- **CI/CD**: Auto builds with guthub actions and deployed to render server (free tier)
-## Feature 1: Accept Score Sheets
+- **CI/CD**: Auto builds with github actions and deployed to render server (free tier)
+
+After running the application, for **Swagger UI**, navigate to,
+```text
+http://localhost:8080/evaluation
+```
+
+## Feature #1: Accept Score Sheets
 <h3><b>Endpoint: POST /evaluation/sheets</b></h3>
 
-**Description:** Accepts subjects' score sheets as input and persists the data.
+```text
+POST http://localhost:8080/evaluation/sheets
+```
+**Description:** Accepts testees and their subjects score sheets as input and persists the data.
 
 **Scoring Rule:** 
 - 1 point for each correct answer
@@ -49,11 +58,11 @@ This Spring Boot application is designed to handle the evaluation of test scores
 - **Response: "Score Sheets Created"**
 - **HTTP 202 status code**
 
-**For InValid Requests:**
+**For Invalid Requests:**
 - **HTTP 400 status Bad Request with message**
 
 **My Assumptions:**
-- If empty or no request body sent, throws 404 bad request with **Score Sheets cannot be Null or Empty**
+- If empty or no request body sent, throws 400 bad request with **Score Sheets cannot be Null or Empty**
 - A testee can be inserted without subjects, later for the same testeeId, subjects can be added and updated. For the same testeeId, allows to add the subjects. If exists, it updates the scores, if not adds the subjects with scores to that testeeId.
 - If no testeeId passed, throws bad request with **TesteeId cannot be Null or Empty**
 - Allowed subjects are maths, general, science. If other subjects are passed, throws bad request with **Invalid Subject with subject name**
@@ -65,7 +74,7 @@ This Spring Boot application is designed to handle the evaluation of test scores
 
 **Sample Request:**
 ```text
-http://localhost:8080/evaluation/scores?testeeIds=1, 2, 3, 4, 5&subjects =general, science&totalRange=1-50&averageRange=&scoreRange=
+GET http://localhost:8080/evaluation/scores?testeeIds=1, 2, 3, 4, 5&subjects =general, science&totalRange=1-50&averageRange=&scoreRange=
 ```
 **Response:**
 ```json
@@ -100,5 +109,11 @@ To pull the docker image:
 ```text
   docker pull surarohith/score_evaluation
 ```
+
+**Live URL:**
+```text
+  https://www.rohithks.dev/evaluation
+```
+The above Live URL will fail for the first time, as I am using a free tier Render server where the server goes to sleep after 15 minutes of inactivity. After the first hit, please hit the URL again after 1-2 minutes to view the Swagger UI for testing.
 
   
