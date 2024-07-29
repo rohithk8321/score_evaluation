@@ -1,0 +1,24 @@
+spring:
+  application:
+  name: score_evaluation
+
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/scores_evaluation?createDatabaseIfNotExist=true
+    username: root
+    password: root
+
+  jpa:
+    database-platform: org.hibernate.dialect.MySQL8Dialect
+    show-sql: true
+    hibernate:
+      ddl-auto: none
+
+  liquibase:
+    change-log: classpath:db/changelog/changelog-master.xml
+
+springdoc:
+  swagger-ui:
+    path: /evaluation
+
+

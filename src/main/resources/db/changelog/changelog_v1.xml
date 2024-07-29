@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
+        <changeSet author="rohithk8321" id="1">
+            <createTable tableName="testee_tab">
+                <column name="testee_id" type="VARCHAR(255)">
+                    <constraints nullable="false" primaryKey="true" primaryKeyName="testee_id_pk"/>
+                </column>
+            </createTable>
+        </changeSet>
+
+        <changeSet author="rohithk8321" id="2">
+            <createTable tableName="subjects_score_tab">
+                <column autoIncrement="true" name="subject_score_id" type="BIGINT">
+                    <constraints nullable="false" primaryKey="true" primaryKeyName="subject_score_id_pk"/>
+                </column>
+                <column name="testee_id" type="VARCHAR(255)">
+                    <constraints nullable="false" foreignKeyName="test_id_fk" referencedTableName="testee_tab" referencedColumnNames="testee_id"/>
+                </column>
+                <column name="subject" type="VARCHAR(255)"/>
+                <column name="total_questions" type="INT"/>
+                <column name="correct" type="INT"/>
+                <column name="incorrect" type="INT"/>
+                <column name="unattempted" type="INT"/>
+                <column name="subject_score" type="DECIMAL(10,2)"/>
+            </createTable>
+        </changeSet>
+</databaseChangeLog>
